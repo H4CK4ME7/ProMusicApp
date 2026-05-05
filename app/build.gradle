@@ -1,0 +1,30 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.promusic.app'
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "com.promusic.app"
+        minSdkVersion 24
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+
+        // C++ Engine ကို ချိတ်ဆက်ရန်
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++14"
+            }
+        }
+    }
+
+    // CMakeLists.txt ဖိုင်တည်ရှိရာ လမ်းကြောင်း
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+}
