@@ -9,24 +9,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-    - name: set up JDK 17
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Correct Gradle Version
-      run: gradle wrapper --gradle-version 8.0
+    - name: Setup Gradle Environment
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.3'
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    - name: Build APK
+      run: gradle assembleDebug --stacktrace
 
-    - name: Build with Gradle
-      run: ./gradlew assembleDebug
-
-    - name: Upload APK
+    - name: Upload Final APK
       uses: actions/upload-artifact@v4
       with:
         name: ProMusic-APK

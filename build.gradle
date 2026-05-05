@@ -4,8 +4,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        // Android ကို Build လုပ်ပေးမည့် Engine Version
-        classpath 'com.android.tools.build:gradle:8.0.0'
+        // အတိအကျ အလုပ်လုပ်မည့် Android Build Engine
+        classpath 'com.android.tools.build:gradle:8.1.1'
     }
 }
 
