@@ -1,19 +1,12 @@
-# CMake ရဲ့ အနည်းဆုံး လိုအပ်တဲ့ version
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.22.1)
+project("promusicengine")
 
-# App ရဲ့ C++ Engine နာမည်ကို သတ်မှတ်ခြင်း
-add_library(
-        promusicengine
-        SHARED
-        main.cpp )
+# Oboe Library ကို ရှာဖွေခြင်း
+find_package(oboe REQUIRED CONFIG)
 
-# Android ရဲ့ Log တွေကို ဖမ်းယူဖို့ Library ရှာခြင်း
-find_library(
-        log-lib
-        log )
+add_library(promusicengine SHARED main.cpp)
 
-# C++ Code ကို Android System နဲ့ Oboe (Audio Library) ဆီ ချိတ်ဆက်ပေးခြင်း
-target_link_libraries(
-        promusicengine
-        ${log-lib}
-        oboe )
+find_library(log-lib log)
+
+# Oboe ကို ကိုယ်ပိုင် C++ Engine နှင့် ချိတ်ဆက်ခြင်း
+target_link_libraries(promusicengine ${log-lib} oboe::oboe)

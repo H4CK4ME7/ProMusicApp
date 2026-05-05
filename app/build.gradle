@@ -4,16 +4,14 @@ plugins {
 
 android {
     namespace 'com.promusic.app'
-    compileSdkVersion 33
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.promusic.app"
-        minSdkVersion 24
-        targetSdkVersion 33
+        minSdk 24
+        targetSdk 33
         versionCode 1
         versionName "1.0"
-
-        // C++ Engine ကို ချိတ်ဆက်ရန်
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++14"
@@ -21,10 +19,25 @@ android {
         }
     }
 
-    // CMakeLists.txt ဖိုင်တည်ရှိရာ လမ်းကြောင်း
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
+            version "3.22.1"
         }
     }
+    // C++ Library များကို ချိတ်ဆက်ရန် ခွင့်ပြုခြင်း
+    buildFeatures {
+        prefab true 
+    }
+}
+
+dependencies {
+    // Google ၏ Oboe Library ကို ထည့်သွင်းခြင်း
+    implementation 'com.google.oboe:oboe:1.7.0'
 }
